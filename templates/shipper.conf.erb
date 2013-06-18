@@ -1,0 +1,44 @@
+input {
+
+  <% if syslog -%>
+  file {
+        type => "syslog"
+        path => [ <%= syslog_path -%>  ]
+        sincedb_path => "/usr/local/logstash"
+  }
+  <% end -%>
+
+   <% if apache -%>
+  file {
+        type => "apache-access"
+        path => [ <%= apache_access_path -%> ]
+        sincedb_path => "/usr/local/logstash"
+  }
+
+  file {
+        type => "apache-error"
+        path => [ <%= apache_error_path -%> ]
+        sincedb_path => "/usr/local/logstash"
+  }
+
+  <% end -%>
+
+
+  <% if apcupsd -%>
+  file {
+                type => "apcupsd"
+                path => [ <%= apcupsd_path -%> ]
+                sincedb_path => "/usr/local/logstash"
+  }
+   <% end -%>
+
+}
+
+output {
+  redis {
+        host => [ "192.168.117.39" ]
+        data_type => 'list'
+        key => 'logstash'
+        batch => true
+  }
+}

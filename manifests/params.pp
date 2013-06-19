@@ -1,6 +1,6 @@
 # Class: puppet-logstash::params
 #
-#
+# Defaults for puppet-logstash.
 class puppet-logstash::params {
 	
 	$version = '1.1.13'
@@ -10,13 +10,16 @@ class puppet-logstash::params {
 	$owner = 'root'
 	$group = 'root'
 	$enable = true
-	$install_java = true
+	$install_java = false
+	$redis_host = '192.168.117.39'
 
 	#config options
 	$syslog = true
 	$apache = false
 	$apcupsd = false
 
+
+    # DO NOT EDIT
 	case $osfamily {
 		"Debian": {
 			$syslog_path = '"/var/log/syslog", "/var/log/auth.log"'

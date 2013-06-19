@@ -1,3 +1,40 @@
+# Class: puppet-logstash
+#
+# Installs logstash with init script and basic config options
+#
+# Params:
+# ---------
+#	$version				Logstash version you see on the jar
+#	$logstash_home			Logstash root directory
+#	$logstash_log_path		Logstash log directory
+#	$logstash_config_path	Logstash config path
+#	$owner					Owner to run logstash (use root for now)
+#	$group 					Group to run logstash (optional)
+#	$syslog 				Use common syslog inputs
+#	$apache  				Use common apache inputs
+#	$apcupsd 				Use common apcupsd inputs
+#	$enable 				Enable/Diable logstash 
+#	$install_java           Install Java
+#	$redis_host 			IP to redis host
+#
+# Look over the params.pp file to change any defaults.
+#
+#
+# Usage:
+# --------
+# include puppet-logstash
+#
+# class { "puppet-logstash":
+#		logstash_home 	=> "/usr/local",
+#		install_java	=> true,
+#		redis 			=> '192.168.100.100',
+# }
+#
+# class { "puppet-logstash":
+#		syslog			=> false,
+#		apache 			=> true,
+# }
+
 class puppet-logstash(
 	$version = $puppet-logstash::params::version,
 	$logstash_home = $puppet-logstash::params::home,
@@ -14,7 +51,9 @@ class puppet-logstash(
 	$apcupsd_path = $puppet-logstash::params::apcupsd_path,
 	$enable = $puppet-logstash::params::enable,
 	$install_java = $puppet-logstash::params::install_java,
+	$redis_host = $puppet-logstash::params::redis_host,
 	) inherits puppet-logstash::params {
+
 
 	# if true, you will need oracle_java module installed: https://github.com/drogerschariot/puppet-oracle-java
 	if $install_java == true{

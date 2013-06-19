@@ -82,8 +82,13 @@ class puppet-logstash(
 		subscribe 	=> File[ "${logstash_config_path}/shipper.conf" ],
 		require		=> [ 
 			File[ "/etc/init.d/logstash" ], 
-			Class[ "oracle_java" ], 
 			File[ "${logstash_home}/logstash-${version}-flatjar.jar" ],
+			File[ "$logstash_log_path" ],
+			File[ "${logstash_config_path}/shipper.conf" ],
+			$install_java ? {
+				true 	=> Class[ "oracle_java" ],
+				default	=> File[ "$logstash_config_path" ],
+			}
 		],
 	}
 }

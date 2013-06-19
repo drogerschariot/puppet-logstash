@@ -10,6 +10,7 @@ class puppet-logstash::params {
 	$owner = 'root'
 	$group = 'root'
 	$enable = true
+	$install_java = true
 
 	#config options
 	$syslog = true

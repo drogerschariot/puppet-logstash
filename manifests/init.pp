@@ -13,11 +13,15 @@ class puppet-logstash(
 	$apcupsd = $puppet-logstash::params::apcupsd,
 	$apcupsd_path = $puppet-logstash::params::apcupsd_path,
 	$enable = $puppet-logstash::params::enable,
+	$install_java = $puppet-logstash::params::install_java,
 	) inherits puppet-logstash::params {
 
-	include oracle_java
+	# if true, you will need oracle_java module installed: https://github.com/drogerschariot/puppet-oracle-java
+	if $install_java == true{
+		include oracle_java
+	}
 
-	# Make Logstash home directory
+	# Make Logstash root directory
 	file { "$logstash_home":
 		ensure 		=> directory,
 		owner		=> $owner,
@@ -25,7 +29,7 @@ class puppet-logstash(
 		mode 		=> 755,
 	}
 
-	# Where logstash will store it's logfile.
+	# Logstash log directory.
 	file { $logstash_log_path:
 		ensure 		=> directory,
 		owner		=> $owner,
@@ -41,6 +45,7 @@ class puppet-logstash(
 		mode 		=> 755,
 	}
 
+	# Main logstash jar
 	file {"${logstash_home}/logstash-${version}-flatjar.jar":
 		ensure		=> present,
 		source		=> "puppet:///modules/puppet-logstash/logstash-${version}-flatjar.jar",
@@ -50,6 +55,7 @@ class puppet-logstash(
 		mode 		=> 755,
 	}
 
+	# Logstash init script
 	file { '/etc/init.d/logstash':
 		ensure 		=> file,
 		content 	=> template("puppet-logstash/logstash-shipper.erb"),
@@ -58,6 +64,7 @@ class puppet-logstash(
 		mode 		=> 770,
 	}
 
+	# Logstash config file. You can edit after it's made for custom inputs.
 	file { "${logstash_config_path}/shipper.conf":
 		ensure		=> present,
 		owner		=> $owner,
@@ -68,12 +75,15 @@ class puppet-logstash(
 		mode 		=> 755,
 	}
 
+	# Start logstash
 	service { "logstash":
 	    enable 		=> $enable,
 		ensure 		=> running,
 		subscribe 	=> File[ "${logstash_config_path}/shipper.conf" ],
-		require		=> [ File[ "/etc/init.d/logstash" ], Class[ "oracle_java" ], ]
+		require		=> [ 
+			File[ "/etc/init.d/logstash" ], 
+			Class[ "oracle_java" ], 
+			File[ "${logstash_home}/logstash-${version}-flatjar.jar" ],
+		],
 	}
-
-
 }

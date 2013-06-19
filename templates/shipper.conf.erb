@@ -4,7 +4,7 @@ input {
   file {
         type => "syslog"
         path => [ <%= syslog_path -%>  ]
-        sincedb_path => "/usr/local/logstash"
+        sincedb_path => "<%= logstash_home -%>"
   }
   <% end -%>
 
@@ -12,13 +12,13 @@ input {
   file {
         type => "apache-access"
         path => [ <%= apache_access_path -%> ]
-        sincedb_path => "/usr/local/logstash"
+        sincedb_path => "<%= logstash_home -%>"
   }
 
   file {
         type => "apache-error"
         path => [ <%= apache_error_path -%> ]
-        sincedb_path => "/usr/local/logstash"
+        sincedb_path => "<%= logstash_home -%>"
   }
 
   <% end -%>
@@ -28,7 +28,7 @@ input {
   file {
                 type => "apcupsd"
                 path => [ <%= apcupsd_path -%> ]
-                sincedb_path => "/usr/local/logstash"
+                sincedb_path => "<%= logstash_home -%>"
   }
    <% end -%>
 

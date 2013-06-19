@@ -12,6 +12,7 @@ class puppet-logstash(
 	$apache_error_path = $puppet-logstash::params::apache_error_path,
 	$apcupsd = $puppet-logstash::params::apcupsd,
 	$apcupsd_path = $puppet-logstash::params::apcupsd_path,
+	$enable = $puppet-logstash::params::enable,
 	) inherits puppet-logstash::params {
 
 	include oracle_java
@@ -68,7 +69,7 @@ class puppet-logstash(
 	}
 
 	service { "logstash":
-	    enable 		=> true,
+	    enable 		=> $enable,
 		ensure 		=> running,
 		subscribe 	=> File[ "${logstash_config_path}/shipper.conf" ],
 		require		=> [ File[ "/etc/init.d/logstash" ], Class[ "oracle_java" ], ]

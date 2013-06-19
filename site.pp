@@ -1,6 +1,6 @@
-node 	'puppetclient1.chariotsolutions.com', 
-		'puppetclient2.chariotsolutions.com', 
-		'puppetclient3.chariotsolutions.com' {
+node 	'puppetclient1', 
+		'puppetclient2', 
+		'puppetclient3' {
 
 			include puppet-logstash
 		}

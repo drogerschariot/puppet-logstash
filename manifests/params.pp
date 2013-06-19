@@ -9,6 +9,7 @@ class puppet-logstash::params {
 	$config_path = '/etc/logstash'
 	$owner = 'root'
 	$group = 'root'
+	$enable = true
 
 	#config options
 	$syslog = true

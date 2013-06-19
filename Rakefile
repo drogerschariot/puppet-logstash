@@ -15,7 +15,7 @@ task :deploy do
 end
 
 task :client1 do
-	sh "ssh -p #{CL1_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster.chariotsolutions.com --test'" do | ok,
+	sh "ssh -p #{CL1_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster --test'" do | ok,
 		status|
 		puts case status.exitstatus
 			when 0 then "Client is up to date."
@@ -27,7 +27,7 @@ task :client1 do
 end
 
 task :client2 do
-	sh "ssh -p #{CL2_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster.chariotsolutions.com --test'" do | ok,
+	sh "ssh -p #{CL2_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster --test'" do | ok,
 		status|
 		puts case status.exitstatus
 			when 0 then "Client is up to date."
@@ -39,7 +39,7 @@ task :client2 do
 end
 
 task :client3 do
-	sh "ssh -p #{CL3_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster.chariotsolutions.com --test'" do | ok,
+	sh "ssh -p #{CL3_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster --test'" do | ok,
 		status|
 		puts case status.exitstatus
 			when 0 then "Client is up to date."
@@ -51,7 +51,7 @@ task :client3 do
 end
 
 task :clients do
-	sh "ssh -p #{CL1_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster.chariotsolutions.com --test'" do | ok,
+	sh "ssh -p #{CL1_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster --test'" do | ok,
 		status|
 		puts case status.exitstatus
 			when 0 then "Client is up to date."
@@ -60,7 +60,7 @@ task :clients do
 			when 4 then "Puppet found errors."
 		end
 	end
-	sh "ssh -p #{CL2_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster.chariotsolutions.com --test'" do | ok,
+	sh "ssh -p #{CL2_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster --test'" do | ok,
 		status|
 		puts case status.exitstatus
 			when 0 then "Client is up to date."
@@ -69,7 +69,7 @@ task :clients do
 			when 4 then "Puppet found errors."
 		end
 	end
-	sh "ssh -p #{CL3_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster.chariotsolutions.com --test'" do | ok,
+	sh "ssh -p #{CL3_PORT} #{USER}@#{HOST} 'puppet agent --server puppetmaster --test'" do | ok,
 		status|
 		puts case status.exitstatus
 			when 0 then "Client is up to date."

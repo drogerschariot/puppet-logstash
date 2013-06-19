@@ -4,35 +4,35 @@
 #
 # Params:
 # ---------
-#	$version				Logstash version you see on the jar
-#	$logstash_home			Logstash root directory
-#	$logstash_log_path		Logstash log directory
+#	$version		Logstash version you see on the jar
+#	$logstash_home		Logstash root directory
+#	$logstash_log_path	Logstash log directory
 #	$logstash_config_path	Logstash config path
-#	$owner					Owner to run logstash (use root for now)
-#	$group 					Group to run logstash (optional)
-#	$syslog 				Use common syslog inputs
-#	$apache  				Use common apache inputs
-#	$apcupsd 				Use common apcupsd inputs
-#	$enable 				Enable/Diable logstash 
+#	$owner			Owner to run logstash (use root for now)
+#	$group 			Group to run logstash (optional)
+#	$syslog 		Use common syslog inputs
+#	$apache  		Use common apache inputs
+#	$apcupsd 		Use common apcupsd inputs
+#	$enable 		Enable/Diable logstash 
 #	$install_java           Install Java
-#	$redis_host 			IP to redis host
+#	$redis_host 		IP to redis host
 #
 # Look over the params.pp file to change any defaults.
 #
 #
 # Usage:
 # --------
-# include puppet-logstash
+# - include puppet-logstash
 #
-# class { "puppet-logstash":
-#		logstash_home 	=> "/usr/local",
-#		install_java	=> true,
-#		redis 			=> '192.168.100.100',
+# - class { "puppet-logstash":
+#	logstash_home 	=> "/usr/local",
+#	install_java	=> true,
+#	redis 		=> '192.168.100.100',
 # }
 #
-# class { "puppet-logstash":
-#		syslog			=> false,
-#		apache 			=> true,
+# - class { "puppet-logstash":
+#	syslog	=> false,
+#	apache 	=> true,
 # }
 
 class puppet-logstash(

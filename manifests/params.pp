@@ -1,7 +1,7 @@
-# Class: puppet-logstash::params
+# Class: logstash::params
 #
-# Defaults for puppet-logstash.
-class puppet-logstash::params {
+# Defaults for logstash.
+class logstash::params {
 	
 	$version = '1.1.13'
 	$home = "/opt/logstash"

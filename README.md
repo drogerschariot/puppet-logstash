@@ -5,7 +5,8 @@ Installs logstash via puppet with init-script, Java, and basic config options.
 
 ### Install ###
 
-Clone to your modules directory.
+- Clone to your modules directory.
+- Change name from puppet-logstash to logstash.
 
 ### Usages ###
 
